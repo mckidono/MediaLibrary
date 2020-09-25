@@ -24,6 +24,10 @@ namespace MediaLibrary
             // LINQ - Count aggregation method
             Console.WriteLine($"There are {Movies.Count()} movies from 1990");
 
+            // LINQ - Any quantifier operator & Contains quantifier operator
+            var validate = movieFile.Movies.Any(m => m.title.Contains("(1921)"));
+            Console.WriteLine($"Any movies from 1921? {validate}");
+
             Console.ForegroundColor = ConsoleColor.White;
 
             logger.Info("Program ended");
