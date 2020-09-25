@@ -1,6 +1,7 @@
 ﻿using System;
 using NLog.Web;
 using System.IO;
+using System.Linq;
 
 namespace MediaLibrary
 {
@@ -15,6 +16,15 @@ namespace MediaLibrary
 
             string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
             MovieFile movieFile = new MovieFile(scrubbedFile);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+
+            // LINQ - Where filter operator & Contains quantifier operator
+            var Movies = movieFile.Movies.Where(m => m.title.Contains("(1990)"));
+            // LINQ - Count aggregation method
+            Console.WriteLine($"There are {Movies.Count()} movies from 1990");
+
+            Console.ForegroundColor = ConsoleColor.White;
 
             logger.Info("Program ended");
         }
