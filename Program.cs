@@ -46,8 +46,19 @@ namespace MediaLibrary
             // };
             // Console.WriteLine(book.Display());
 
-            string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
-            logger.Info(scrubbedFile);
+//           string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
+//            logger.Info(scrubbedFile);
+            string movieFilePath = Directory.GetCurrentDirectory() + "\\movies.scrubbed.csv";
+
+            MovieFile movieFile = new MovieFile(movieFilePath);
+            Movie movie = new Movie();
+                movie.title="test";
+                movie.genres.Add("This is a test");
+                movie.director=("test");
+                TimeSpan t=new TimeSpan(1,1,1);
+                movie.runningTime=(t);
+                movieFile.AddMovie(movie);
+
 
             logger.Info("Program ended");
         }
