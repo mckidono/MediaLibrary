@@ -34,12 +34,12 @@ namespace MediaLibrary
                          movie.mediaId = UInt64.Parse(line.Substring(0, idx - 1));
                          line = line.Substring(idx + 1);
                          idx = line.IndexOf('"');
-                         movie.title = line.Substring(0, idx);
+                        // movie.title = line.Substring(0, idx);
                          line = line.Substring(idx + 2);
                          movie.genres = line.Split('|').ToList();
-                         movie.director = line.Substring(0, idx);
+                        // movie.director = line.Substring(0, idx);
                          string time = movie.runningTime.ToString();
-                         time = line.Substring(0, idx);
+                        // time = line.Substring(0, idx);
                     }
                     Movies.Add(movie);
                 }
@@ -59,8 +59,8 @@ namespace MediaLibrary
         public void AddMovie(Movie movie){
             try
             {
-                movie.mediaId=164980;
-                using(StreamWriter sw = new StreamWriter(filePath)){
+                movie.mediaId=Movies.Max(m => m.mediaId) + 1;
+                using(StreamWriter sw = new StreamWriter(filePath, true)){
                     sw.WriteLine($"{movie.mediaId},{movie.title},{string.Join("|", movie.genres)},{movie.director},{movie.runningTime}");
                 }
                 Movies.Add(movie);
