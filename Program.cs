@@ -30,9 +30,32 @@ namespace MediaLibrary
                     Movie movie = new Movie();
                         Console.WriteLine("Enter movie title");
                         movie.title = Console.ReadLine();
-                        movie.genres.Add("This is a test");
-                        movie.director=("test");
-                        TimeSpan t=new TimeSpan(1,1,1);
+                        string input;
+                        do
+                        {
+                            Console.WriteLine("Enter genre (or done to quit)");
+                            
+                            input = Console.ReadLine();
+                            
+                            if (input != "done" && input.Length > 0)
+                            {
+                                movie.genres.Add(input);
+                            }
+                        } while (input != "done");
+                        
+                        if (movie.genres.Count == 0)
+                        {
+                            movie.genres.Add("(no genres listed)");
+                        }
+                        System.Console.WriteLine("Enter Director name");
+                        movie.director=Console.ReadLine();
+                        System.Console.Write("Enter the duration\nHour/s:");
+                        int hour=Console.Read();
+                        
+                        System.Console.Write("Minutes:");
+                        int minutes= Console.Read();
+
+                        TimeSpan t=new TimeSpan(hour,minutes,00);
                         movie.runningTime=(t);
                         movieFile.AddMovie(movie);
                         logger.Info(movie.title+" Created");
