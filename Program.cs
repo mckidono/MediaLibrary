@@ -49,14 +49,9 @@ namespace MediaLibrary
                         }
                         System.Console.WriteLine("Enter Director name");
                         movie.director=Console.ReadLine();
-                        System.Console.Write("Enter the duration\nHour/s:");
-                        int hour=Console.Read();
+                        System.Console.WriteLine("Enter the duration Hour:Minute:Second");
+                        movie.runningTime = TimeSpan.Parse(Console.ReadLine());
                         
-                        System.Console.Write("Minutes:");
-                        int minutes= Console.Read();
-
-                        TimeSpan t=new TimeSpan(hour,minutes,00);
-                        movie.runningTime=(t);
                         movieFile.AddMovie(movie);
                         logger.Info(movie.title+" Created");
                 }
