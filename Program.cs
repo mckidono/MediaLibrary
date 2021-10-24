@@ -15,7 +15,7 @@ namespace MediaLibrary
             logger.Info("Program started");
 //           string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
 //            logger.Info(scrubbedFile);
-            string movieFilePath = Directory.GetCurrentDirectory() + "\\movies.scrubbed.csv";
+            string movieFilePath = Directory.GetCurrentDirectory() + "//movies.scrubbed.csv";
 
             movieFile movieFile = new movieFile(movieFilePath);
             
@@ -61,6 +61,8 @@ namespace MediaLibrary
                         movieFile.AddMovie(movie);
                         logger.Info(movie.title+" Created");
                 }
+
+
                  else if (choice == "2")
                 {
                     foreach(Movie m in movieFile.Movies)
@@ -71,21 +73,22 @@ namespace MediaLibrary
 
 
                 else if (choice == "3"){
-                    System.Console.WriteLine("Enter the title you want to serch for");
-                    System.Console.Write(">");
+                    Console.WriteLine("Enter your search term:");
+                    string search = Console.ReadLine();
 
-                    string searchFor = Console.ReadLine(); 
-
-                    var titles = movieFile.Movies.Where(m => m.title.Contains(searchFor)).Select(m => m.title);
-                    Console.WriteLine($"There are {titles.Count()} movies with "+ searchFor +" in the title:");
-                        foreach(var t in titles)
-                        {
-                            Console.WriteLine($"  {t}");
-                        }
-                }
+                    
+                        
+                    var titles = movieFile.Movies.Where(m => m.title.Contains("Shark")).Select(m => m.title);
+                    // LINQ - Count aggregation method
+                    Console.WriteLine($"There are {titles.Count()} movies with \"Shark\" in the title:");
+                    foreach(string t in titles)
+                    {
+                        Console.WriteLine($"  {t}");
+                    }
 
 
             logger.Info("Program ended");
         }
     }
-}
+    }
+    }
