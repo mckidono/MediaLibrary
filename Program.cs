@@ -17,7 +17,7 @@ namespace MediaLibrary
 //            logger.Info(scrubbedFile);
             string movieFilePath = Directory.GetCurrentDirectory() + "\\movies.scrubbed.csv";
 
-            MovieFile movieFile = new MovieFile(movieFilePath);
+            movieFile movieFile = new movieFile(movieFilePath);
             
             string choice = "";
             Console.WriteLine("1) Add Movie");
@@ -68,17 +68,23 @@ namespace MediaLibrary
                         Console.WriteLine(m.Display());
                     }
                 }
+
+
                 else if (choice == "3"){
                     System.Console.WriteLine("Enter the title you want to serch for");
                     System.Console.Write(">");
+
                     string searchFor = Console.ReadLine(); 
+
                     var titles = movieFile.Movies.Where(m => m.title.Contains(searchFor)).Select(m => m.title);
-                     Console.WriteLine($"There are {titles.Count()} movies with "+ searchFor +" in the title:");
-                        foreach(string t in titles)
+                    Console.WriteLine($"There are {titles.Count()} movies with "+ searchFor +" in the title:");
+                        foreach(var t in titles)
                         {
                             Console.WriteLine($"  {t}");
                         }
                 }
+
+
             logger.Info("Program ended");
         }
     }

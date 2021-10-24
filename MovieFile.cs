@@ -6,12 +6,12 @@ using NLog.Web;
 
 namespace MediaLibrary
 {
-    public class MovieFile
+    public class movieFile
     {
         public string filePath{get; set;}
         public List<Movie> Movies { get; set; }
         private static NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
-        public MovieFile(string movieFilePath){
+        public movieFile(string movieFilePath){
             filePath = movieFilePath;
             Movies = new List<Movie>();
             using(StreamReader sr = new StreamReader(filePath)){
