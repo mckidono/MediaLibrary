@@ -1,6 +1,7 @@
 ﻿using System;
 using NLog.Web;
 using System.IO;
+using System.Linq;
 
 namespace MediaLibrary
 {
@@ -21,7 +22,9 @@ namespace MediaLibrary
             string choice = "";
             Console.WriteLine("1) Add Movie");
                 Console.WriteLine("2) Display All Movies");
+                System.Console.WriteLine("3) Search for a movie");
                 Console.WriteLine("Enter to quit");
+                System.Console.Write(">");
                 // input selection
                 choice = Console.ReadLine();
                 logger.Info("User choice: {Choice}", choice);
@@ -29,12 +32,13 @@ namespace MediaLibrary
                 {
                     Movie movie = new Movie();
                         Console.WriteLine("Enter movie title");
+                        System.Console.Write(">");
                         movie.title = Console.ReadLine();
                         string input;
                         do
                         {
                             Console.WriteLine("Enter genre (or done to quit)");
-                            
+                            System.Console.Write(">");
                             input = Console.ReadLine();
                             
                             if (input != "done" && input.Length > 0)
@@ -48,8 +52,10 @@ namespace MediaLibrary
                             movie.genres.Add("(no genres listed)");
                         }
                         System.Console.WriteLine("Enter Director name");
+                        System.Console.Write(">");
                         movie.director=Console.ReadLine();
                         System.Console.WriteLine("Enter the duration Hour:Minute:Second");
+                        System.Console.Write(">");
                         movie.runningTime = TimeSpan.Parse(Console.ReadLine());
                         
                         movieFile.AddMovie(movie);
@@ -61,6 +67,17 @@ namespace MediaLibrary
                     {
                         Console.WriteLine(m.Display());
                     }
+                }
+                else if (choice == "3"){
+                    System.Console.WriteLine("Enter the title you want to serch for");
+                    System.Console.Write(">");
+                    string searchFor = Console.ReadLine(); 
+                    var titles = movieFile.Movies.Where(m => m.title.Contains(searchFor)).Select(m => m.title);
+                     Console.WriteLine($"There are {titles.Count()} movies with "+ searchFor +" in the title:");
+                        foreach(string t in titles)
+                        {
+                            Console.WriteLine($"  {t}");
+                        }
                 }
             logger.Info("Program ended");
         }
