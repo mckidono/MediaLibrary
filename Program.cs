@@ -13,11 +13,9 @@ namespace MediaLibrary
         {
 
             logger.Info("Program started");
-//           string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
-//            logger.Info(scrubbedFile);
-            string movieFilePath = Directory.GetCurrentDirectory() + "//movies.scrubbed.csv";
-
-            movieFile movieFile = new movieFile(movieFilePath);
+            string scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
+            logger.Info(scrubbedFile);
+            MovieFile movieFile = new MovieFile(scrubbedFile);
             
             string choice = "";
             Console.WriteLine("1) Add Movie");
@@ -74,21 +72,17 @@ namespace MediaLibrary
 
                 else if (choice == "3"){
                     Console.WriteLine("Enter your search term:");
-                    string search = Console.ReadLine();
-
-                    
-                        
-                    var titles = movieFile.Movies.Where(m => m.title.Contains("Shark")).Select(m => m.title);
-                    // LINQ - Count aggregation method
-                    Console.WriteLine($"There are {titles.Count()} movies with \"Shark\" in the title:");
-                    foreach(string t in titles)
-                    {
-                        Console.WriteLine($"  {t}");
-                    }
+                    System.Console.Write(">");
+            String Search = Console.ReadLine();
+            var titles = movieFile.Movies.Where(m => m.title.Contains(Search)).Select(m => m.title);
+            Console.WriteLine($"There are {titles.Count()} movies with "+Search+" in the title:");
+            foreach(string t in titles)
+            {
+                Console.WriteLine($"  {t}");
+            }
 
 
             logger.Info("Program ended");
         }
     }
-    }
-    }
+    }}
